@@ -15,6 +15,9 @@ ADLS / MLflow.  It demonstrates:
 For full architecture, design decisions, and data-flow diagrams see
 [`architecture/architecture.md`](architecture/architecture.md).
 
+For a critical comparison of tool/service options, approximate costs, and how the design evolves from 1 req/sec to 1 million req/sec see
+[`architecture/trade_offs.md`](architecture/trade_offs.md).
+
 ---
 
 ## Repository layout
@@ -162,3 +165,10 @@ See [`architecture/architecture.md`](architecture/architecture.md) for:
 - Scalability and performance strategies
 - Potential challenges and mitigations
 - Key design trade-offs
+
+See [`architecture/trade_offs.md`](architecture/trade_offs.md) for:
+
+- Critical comparison of every tool/service alternative at each design stage
+- Approximate costs for each option
+- Architecture evolution from 1 req/sec → 1 K req/sec → 1 M req/sec
+- Total cost of ownership summary and upgrade decision matrix
