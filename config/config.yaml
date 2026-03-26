@@ -1,0 +1,60 @@
+platform:
+  name: azure-ml-platform
+  environment: dev
+
+storage:
+  adls_account: "your-adls-account"
+  container: "ml-platform"
+  feature_store_path: "feature_store"
+  model_artifacts_path: "model_artifacts"
+  raw_data_path: "raw_data"
+  streaming_path: "streaming_data"
+
+mlflow:
+  tracking_uri: "mlruns"          # local for demo; use Azure ML / Databricks URI in prod
+  experiment_name: "customer_churn_experiment"
+  registered_model_name: "customer_churn_model"
+
+feature_store:
+  batch_feature_table: "batch_features"
+  streaming_feature_table: "streaming_features"
+  joined_feature_table: "joined_features"
+
+model:
+  name: "customer_churn_model"
+  version: "1"
+  input_features:
+    - "age"
+    - "tenure_months"
+    - "monthly_spend"
+    - "num_products"
+    - "support_tickets_last_90d"
+    - "avg_session_duration_minutes"
+    - "days_since_last_login"
+    - "event_clicks_7d"
+    - "event_purchases_7d"
+    - "event_support_7d"
+  output: "churn_probability"
+
+batch_inference:
+  input_path: "feature_store/joined_features"
+  output_path: "inference_results/batch"
+  schedule: "0 2 * * *"          # daily at 02:00
+
+streaming_inference:
+  consumer_group: "$Default"
+  checkpoint_path: "checkpoints/streaming_inference"
+  output_path: "inference_results/streaming"
+  max_events_per_trigger: 1000
+
+serving:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  timeout_seconds: 30
+
+monitoring:
+  drift_threshold: 0.1
+  alert_email: "ml-ops@example.com"
+  metrics_path: "monitoring/metrics"
+  alert_path: "monitoring/alerts"
