@@ -25,7 +25,9 @@ For a critical comparison of tool/service options, approximate costs, and how th
 ```
 .
 ├── architecture/
-│   └── architecture.md          # Architecture diagram, tool justification, design trade-offs
+│   ├── architecture.md          # Architecture diagram, tool justification, design trade-offs
+│   ├── basic_design.md          # Kafka P2P payment risk pipeline – architecture & scaling challenges
+│   └── trade_offs.md            # Tool comparisons, costs, architecture evolution
 ├── config/
 │   └── config.yaml              # Platform configuration (paths, thresholds, model names)
 ├── data/
@@ -172,3 +174,10 @@ See [`architecture/trade_offs.md`](architecture/trade_offs.md) for:
 - Approximate costs for each option
 - Architecture evolution from 1 req/sec → 1 K req/sec → 1 M req/sec
 - Total cost of ownership summary and upgrade decision matrix
+
+See [`architecture/basic_design.md`](architecture/basic_design.md) for:
+
+- High-level architecture of a Kafka data ingestion pipeline for real-time P2P payment risk evaluation
+- End-to-end data flow walkthrough for a single P2P transaction
+- Real-world scaling scenarios (100 TPS → 500K+ TPS) with concrete challenges and mitigations
+- Technology stack summary for the Azure Databricks ecosystem
